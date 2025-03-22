@@ -13,6 +13,7 @@ class Utms:
 
 class Deliveries:
 	stat = 'Deliveries/Stat'
+	get = 'Deliveries/get'
 
 
 class Subscribers:
