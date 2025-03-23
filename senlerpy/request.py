@@ -3,7 +3,8 @@ import requests
 import hashlib
 from .exceptions import HttpError
 from . import __version__, __api_version__
-
+import logging
+logger = logging.getLogger(__name__)
 
 class RequestApi:
 	__base_url = 'https://senler.ru/api/'
@@ -26,8 +27,10 @@ class RequestApi:
 
 	def send(self, method_name, data):
 		data['v'] = str(__api_version__)
-		data['hash'] = self._calculate_hash(data)
+		data['access_token'] = self.__secret
 		url = self.__base_url + str(method_name)
+		logger.error(url)
+		logger.error(data)
 		try:
 			result = self.__session.post(url, data, timeout=300)
 		except (ConnectionError, TimeoutError, requests.exceptions.ReadTimeout):
