@@ -16,13 +16,10 @@ class Senler:
 	def __error_handler(self, response):
 		if bool(response['success']):
 			return response
+		logger.error(response)
 		raise ApiError(response)
 
 	def __call__(self, method, **kwargs):
-		if 'vk_group_id' not in kwargs.keys():
-			if self.vk_group is None:
-				raise WrongId('vk_group_id is not specified by any of the methods')
-			kwargs['vk_group_id'] = self.vk_group
 		response = self._rq.send(str(method), kwargs)
 		json_response = {}
 		try:
