@@ -31,10 +31,24 @@ class RequestApi:
 		url = self.__base_url + str(method_name)
 		logger.error(url)
 		logger.error(data)
-		try:
-			result = self.__session.post(url, data, timeout=300)
-		except (ConnectionError, TimeoutError, requests.exceptions.ReadTimeout):
-			raise HttpError('Error with connection to senler.ru API server')
+
+		if url == 'https://senler.ru/api/Deliveries/Stat':
+			multipart_payload = {key: (None, val) for key, val in data.items()}
+
+			result = requests.post(url, files=multipart_payload)
+			logger.error(result.text)
+		else:
+			request = requests.Request(
+				method="GET",
+				url=url,
+				params=data
+			)
+			prepared_request = self.__session.prepare_request(request)
+
+			try:
+				result = self.__session.post(url, data, timeout=300)
+			except (ConnectionError, TimeoutError, requests.exceptions.ReadTimeout):
+				raise HttpError('Error with connection to senler.ru API server')
 		if result.status_code == 404:
 			raise HttpError(f'Method {method_name} not found!')
 		return result
