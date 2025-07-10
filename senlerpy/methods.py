@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 
 
+class Bots:
+	get = 'bots/get'
+	
 class Utms:
 	get = 'utms/Get'
 	add = 'utms/Add'
