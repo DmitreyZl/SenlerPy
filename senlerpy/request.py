@@ -32,8 +32,7 @@ class RequestApi:
 		logger.error(url)
 		logger.error(data)
 
-		if url == 'https://senler.ru/api/Deliveries/Stat' and data['m']=='get':
-			logger.error('get')
+		if url == 'https://senler.ru/api/Deliveries/Stat':
 			multipart_payload = {key: (None, val) for key, val in data.items()}
 
 			result = requests.post(url, files=multipart_payload)
