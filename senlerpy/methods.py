@@ -3,6 +3,7 @@
 
 class Bots:
 	get = 'bots/get'
+	get_steps = 'bots/getSteps'
 	
 class Utms:
 	get = 'utms/Get'
