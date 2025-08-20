@@ -26,3 +26,6 @@ class Subscribers:
 	delete = 'subscribers/del'
 	stat_subscribe = 'subscribers/StatSubscribe'
 
+
+class Subscriptions:
+	get = 'subscriptions/get'
